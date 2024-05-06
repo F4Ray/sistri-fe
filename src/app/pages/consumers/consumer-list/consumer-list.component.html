@@ -1,0 +1,93 @@
+<div class="container mt-3">
+  <div class="row mb-3">
+    <div class="col-md-12 d-flex justify-content-between">
+      <h4>Daftar Nasabah Test Drive</h4>
+    </div>
+    <div class="col-md-12">
+      <div class="d-flex justify-content-end gap-3">
+        <!-- <input type="text" class="form-control-sm" 
+          [(ngModel)]="search" 
+          name="search" 
+          (keyup.enter)="onList()" 
+          placeholder="Search..."
+        /> -->
+        <input type="search" class="form-control"  [(ngModel)]="search" name="search" 
+          (keyup.enter)="onList()" id="search-input" placeholder="Cari..."  autocomplete="off" (ngModelChange)="onSearchChange()">
+            <select class="form-control" style="max-width: 20%;" [(ngModel)]="selectedOption" (change)="onList()">
+              <option value="createdDate">Hari ini</option>
+              <option value="consumerName">Seluruhnya</option>
+            </select>
+        <app-customer-create (onSuccess)="onSuccessCreateCustomer($event)"></app-customer-create>
+        <!-- <button (click)="onList()" class="btn btn-primary">
+          refresh
+        </button> -->
+        <button  class="btn btn-primary" (click)="onList(0)">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover table-stripped" *ngIf="!errorNotFound">
+        <thead>
+          <tr>
+            <th>Nomor</th>
+            <th>Nama</th>
+            <th>Mobil</th>
+            <th>Status Antrian</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let consumer of consumers.data.content;let i=index">
+            <td>{{ i + 1 }}</td>
+            <td> {{consumer.consumerName}} </td>
+            <td> {{consumer.carID.merkID.merk }} {{consumer.carID.tipe}}</td>
+            <td>
+              <span class="badge bg-warning" *ngIf="consumer.statusID == 1">Menunggu Antrian</span>
+              <span class="badge bg-info" *ngIf="consumer.statusID == 2">Sedang Test Drive</span>
+              <span class="badge bg-success" *ngIf="consumer.statusID == 3">Selesai Test Drive</span>
+            </td>
+            <td>
+              <app-customer-qr [id]="consumer.testDriveID" ></app-customer-qr>
+              <button class="btn btn-sm btn-danger ms-2" (click)="doHapus(consumer.testDriveID,consumer.consumerName)">Hapus</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              <app-paging 
+              [totalItems]="consumers.data.totalItems" 
+              [totalPages]="consumers.data.totalPages"
+              [nowPage]="this.nowPage"
+              (onPaginate)="onPaginate($event)"
+            ></app-paging>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <table class="table table-bordered table-hover table-stripped" *ngIf="errorNotFound">
+        <thead>
+          <tr>
+            <th>Nomor</th>
+            <th>Nama</th>
+            <th>Mobil</th>
+            <th>Status Antrian</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5" class="text-center">
+              Data Tidak Ditemukan
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

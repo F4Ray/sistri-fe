@@ -1,0 +1,81 @@
+<div class="container mt-3">
+  <div class="row mb-3">
+    <div class="col-md-12 d-flex justify-content-between">
+      <h4>Daftar Merk</h4>
+    </div>
+    <div class="col-md-12">
+      <div class="d-flex justify-content-end gap-3">
+        <!-- <form class="bd-search position-relative me-auto"> -->
+          <input type="search" class="form-control"  [(ngModel)]="search" name="search" 
+          (keyup.enter)="onList()" id="search-input" placeholder="Cari..."  autocomplete="off" (ngModelChange)="onSearchChange()">
+        <!-- </form> -->
+        <app-merk-create (onSuccess)="onSuccessCreateMerk($event)"></app-merk-create>
+        
+        <button  class="btn btn-primary" (click)="onList(0)">
+          refresh
+        </button>
+      </div>
+    </div>
+    <div class="col-md-12 d-flex justify-content-end mt-2">
+      <!-- <button type="button" class="btn btn-primary">Upload Batch</button> -->
+      <!-- <app-merk-create-batch></app-merk-create-batch> -->
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover table-stripped" *ngIf="!errorNotFound">
+        <thead>
+          <tr>
+            <th>Nomor</th>
+            <th>Kode Dealer</th>
+            <th>Merk</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let merk of merks.data.content;let i=index">
+            <td>{{ i + 1}}</td>
+            <td>{{ merk.dealerCode }}</td>
+            <td>{{ merk.merk }}</td>
+            <td>
+              <app-merk-details [id]="merk.merkID" (onSuccess)="onSuccessEditMerk($event)"></app-merk-details>
+              <button class="btn btn-sm btn-danger ms-1" (click)="doHapus(merk.merk, merk.dealerCode, merk.merkID)">Hapus</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              <app-paging 
+                [totalItems]="merks.data.totalItems" 
+                [totalPages]="merks.data.totalPages"
+                [nowPage]="this.nowPage"
+                (onPaginate)="onPaginate($event)"
+              ></app-paging>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <table class="table table-bordered table-hover table-stripped" *ngIf="errorNotFound">
+        <thead>
+          <tr>
+            <th>Nomor</th>
+            <th>Nama</th>
+            <th>Mobil</th>
+            <th>Status Antrian</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5" class="text-center">
+              Data Tidak Ditemukan
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,64 @@
+<div id="container_div">
+    <ngb-toast *ngIf="showToastFlag"
+        [class]="'bg-success text-light toastnya'"
+        [autohide]="true"
+        [delay]="5000"
+    >
+    Sukses mendaftar, silahkan login
+    </ngb-toast>
+    
+    <form class="loginnya">
+    <input class="loginnya" type="radio" name="action" value="signin" checked="true" id="signin" [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
+    <label class="loginnya" for="signin">Sign In</label>
+    <input class="loginnya" type="radio" name="action" id="signup" value="signup"  [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
+    <label class="loginnya" for="signup">Sign Up</label>
+    <!-- <input class="loginnya" type="radio" name="action" id="reset" value="reset"  [(ngModel)]="selectedOption" [ngModelOptions]="{standalone: true}">
+    <label class="loginnya" for="reset">Reset</label> -->
+    <div id="wrapper">
+        <div id="arrow"></div>
+        <input class="loginnya"
+        id="email" 
+        placeholder="Email" 
+        type="text"
+        #email="ngModel"
+        [(ngModel)]="username"
+        
+        [ngModelOptions]="{standalone: true}"
+        >
+        <input class="loginnya"
+        id="pass" 
+        placeholder="Password" 
+        type="password" 
+        [(ngModel)]="passwords"
+        [ngModelOptions]="{standalone: true}" 
+        #password="ngModel"
+        (keydown)="onKeyDown($event)" (keyup.enter)="doAuth()">
+        <input id="repass" placeholder="Repeat password" type="password" class="loginnya">
+        <input class="loginnya"
+        placeholder="First Name"
+        type="text"
+        [(ngModel)]="userSignUp.personalDataID.firstName" [ngModelOptions]="{standalone: true}" >
+        <input class="loginnya"
+        placeholder="Last Name"
+        type="text"
+        [(ngModel)]="userSignUp.personalDataID.lastName" [ngModelOptions]="{standalone: true}" >
+        <input class="loginnya"
+        placeholder="Kode Dealer"
+        type="text"
+        [(ngModel)]="userSignUp.dealerCode" [ngModelOptions]="{standalone: true}" >
+        <!-- <select name="" id="">Pilih Merk
+            <option value="">Tess</option>
+            <option value="">Tess</option>
+        </select> -->
+    </div>
+    <button class="loginnya" (click)="doAuth()">
+        <span class="loginnya">
+        Reset password
+        <br>
+        Sign in
+        <br>
+        Sign up
+        </span>
+    </button>
+</form>
+</div>

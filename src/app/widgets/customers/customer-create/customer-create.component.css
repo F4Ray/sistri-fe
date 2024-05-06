@@ -1,0 +1,7 @@
+::ng-deep .ng-select .ng-dropdown-panel .ng-option {
+  color: black;
+}
+
+.item-label {
+  color: black;
+}

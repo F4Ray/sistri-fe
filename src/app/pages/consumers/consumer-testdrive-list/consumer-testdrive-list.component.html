@@ -1,0 +1,84 @@
+<div class="container mt-3">
+  <div class="row mb-3">
+    <div class="col-md-12 d-flex justify-content-between">
+      <h4>Daftar Nasabah Test Drive</h4>
+      <div class="d-flex justify-content-end gap-3 w-75">
+        <!-- <input type="text" class="form-control-sm w-50" 
+          [(ngModel)]="search" 
+          name="search" 
+          (keyup.enter)="onList()" 
+          placeholder="Search..."
+        /> -->
+
+        <input type="search" class="form-control"  [(ngModel)]="search" name="search" 
+          (keyup.enter)="onList()" id="search-input" placeholder="Cari..."  autocomplete="off" (ngModelChange)="onSearchChange()">
+        <!-- <select class="form-control-sm" name="limit" >
+          <option value="1">1 Item</option>
+          <option value="5">5 Items</option>
+          <option value="10">10 Items</option>
+          <option value="20">20 Items</option>
+        </select> -->
+        <button (click)="onList()" class="btn btn-primary">
+          refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <table class="table table-bordered table-hover table-stripped" *ngIf="!errorNotFound">
+        <thead>
+          <tr>
+            <th>Nomor</th>
+            <th>Nama</th>
+            <th>Mobil</th>
+            <th>Status Antrian</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let consumer of consumers.data.content;let i=index">
+            <td>{{ i + 1 }}</td>
+            <td> {{consumer.consumerName}} </td>
+            <td> {{consumer.carID.merkID.merk }} {{consumer.carID.tipe}}</td>
+            <td>
+              <span class="badge bg-warning" *ngIf="consumer.statusID == 1">Menunggu Antrian</span>
+              <span class="badge bg-info" *ngIf="consumer.statusID == 2">Sedang Test Drive</span>
+              <span class="badge bg-success" *ngIf="consumer.statusID == 3">Selesai Test Drive</span>
+            </td>
+            <td class="d-grip gap-2">
+              <button type="button" class="btn btn-sm btn-success" (click)="doSuccessTestDrive(consumer.testDriveID)">Selesai Test Drive</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+              
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <table class="table table-bordered table-hover table-stripped" *ngIf="errorNotFound">
+        <thead>
+          <tr>
+            <th>Nomor</th>
+            <th>Nama</th>
+            <th>Mobil</th>
+            <th>Status Antrian</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5" class="text-center">
+              Data Tidak Ditemukan
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

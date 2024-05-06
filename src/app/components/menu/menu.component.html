@@ -1,0 +1,62 @@
+<ng-template #content let-offcanvas>
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title" id="offcanvas-basic-title">Menu</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body">
+		<ul class="navbar-nav mr-auto" *ngFor="let menu of getMenu(); let indexNum = index;">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active-nav" [routerLink]="[menu.mainPath]" (click)="close(content)" >{{ menu.title }}</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li> -->
+    </ul>
+		<button (click)="onSignOut();close(content)" class="btn btn-sm btn-outline-success mt-2">Sign Out</button>
+		<!-- <ul class="list-group" *ngFor="let menu of getMenu(); let indexNum = index;">
+			<a [routerLink]="[menu.mainPath]" 
+								routerLinkActive="active"
+								class="list-group-item list-group-item-action" (click)="close(content)">
+								{{ menu.title }}
+							</a>
+		</ul> -->
+		<!-- <div class="accordion" id="accordionExample">
+			<div class="accordion-item" *ngFor="let menu of getMenu(); let indexNum = index;">
+				<h2 class="accordion-header">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#a'+indexNum" aria-expanded="false" >
+						{{ menu.title }}
+					</button>
+				</h2>
+
+				<div [id]="'a'+indexNum" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						<ul class="list-group" >
+							<a [routerLink]="[menu.mainPath]" 
+								routerLinkActive="active"
+								class="list-group-item list-group-item-action">
+								{{ menu.title }}
+							</a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!-- <ul class="list-group">
+      <a *ngFor="let menu of getMenu()" [routerLink]="[menu.mainPath]" 
+        routerLinkActive="active"
+        class="list-group-item list-group-item-action">
+        {{ menu.title }}
+      </a>
+    </ul> -->
+	</div>
+</ng-template>
+<button class="navbar-toggler" type="button" (click)="open(content)" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+</button>
+<!-- <button class="btn btn-outline-primary btn-sm" (click)="open(content)">Menu</button> -->

@@ -1,0 +1,6 @@
+input[readonly] {
+  background-color: #f0f0f0; /* Change background color */
+  border-color: #ccc; /* Change border color */
+  color: #666; /* Change text color */
+  /* Add any other styles you want to apply */
+}

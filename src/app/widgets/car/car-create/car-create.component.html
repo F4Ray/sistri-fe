@@ -1,0 +1,35 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Tambah Daftar Mobil</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <div class="form-group">
+      <!-- <label for="" class="mt-1">Merk Mobil</label> -->
+      <ng-select
+        [items]="merk.data.content"
+        bindValue="merkID"
+        [(ngModel)]="carSelected"
+        [searchFn]="customSearchFn"
+        placeholder="Pilih Merk Mobil"
+        (ngModelChange)="onSelectionChange($event)"
+      >
+        <ng-template ng-label-tmp let-merk="item">
+          {{merk.dealerCode}} - {{ merk.merk }}
+        </ng-template>
+        <ng-template ng-option-tmp let-merk="item">
+          {{merk.dealerCode}} - {{ merk.merk}}
+        </ng-template>
+      </ng-select>
+    </div>
+    <div class="form-floating mb-2">
+      <input #namenya type="text" class="form-control mt-2" (focus)="true" placeholder="" [(ngModel)]="carRequest.tipe">
+      <label for="floatingInputValue">Merk</label>
+    </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); onCreate()">Save</button>
+	</div>
+</ng-template>
+
+<button class="btn btn-outline-primary" (click)="open(content,0)">Tambah</button>

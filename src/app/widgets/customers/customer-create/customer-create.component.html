@@ -1,0 +1,65 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Tambah Data Nasabah Test Drive</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+
+    <div class="form-floating mb-2">
+      <input #namenya type="text" class="form-control" (focus)="true" placeholder="" [(ngModel)]="consumerRequest.consumerName">
+      <label for="floatingInputValue">Nama Nasabah</label>
+    </div>
+    <!-- <div class="form-group">
+      <label for="" class="mt-1">Merk Mobil</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected hidden>Pilih Merk Mobil</option>
+        <ng-container *ngFor="let car of cars.data.content">
+        
+          <option value="{{ car.carID }}">{{ car.merkID.merk }} {{ car.tipe}}</option>
+        </ng-container>
+      </select>
+    </div> -->
+    <div class="form-group">
+      <label for="" class="mt-1">Merk Mobil</label>
+      <!-- <ng-select [items]="cars.data.content"
+                bindLabel="customLabel"
+                [(ngModel)]="selectedCar"
+                placeholder="Pilih Merk Mobil">
+        <ng-template ng-option-tmp let-car="item">
+          {{ car.tipe }} - {{ car.merkID.merk }}
+        </ng-template>
+      </ng-select> -->
+
+      <!-- <ng-select
+        [items]="cars.data.content"
+        bindValue="carID"
+        [(ngModel)]="selectedCar"
+        autofocus
+      >
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.tipe }} - {{ item.merkID?.merk }}
+        </ng-template>
+      </ng-select> -->
+      <ng-select
+        [items]="cars.data.content"
+        bindValue="carID"
+        [(ngModel)]="consumerRequest.carID"
+        placeholder="Pilih Mobil"
+        [searchFn]="customSearchFn"
+        (ngModelChange)="onSelectionChange($event)"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          {{ item.merkID?.merk }} - {{ item.tipe }}
+        </ng-template>
+        <ng-template ng-option-tmp let-car="item">
+          {{ car.merkID.merk }} - {{ car.tipe }}
+        </ng-template>
+      </ng-select>
+    </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); onCreate()">Save</button>
+	</div>
+</ng-template>
+
+<button class="btn btn-outline-primary" (click)="open(content)">Tambah</button>

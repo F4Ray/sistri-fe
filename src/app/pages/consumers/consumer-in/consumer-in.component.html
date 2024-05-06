@@ -1,0 +1,91 @@
+<!-- <h1>Antrian ke : {{nomorAntrian}} / {{totalAntrian}}</h1>
+<p>Nama : {{consumer.consumerName}} </p>
+<div [hidden]="nomorAntrian !== 1">Sekarang adalah nomor antrianmu, silahkan pergi ke loket untuk melakukan testdrive</div>
+<button [disabled]="nomorAntrian !== 1">Submit</button> -->
+
+<div class="app-content flex-column-fluid mt-3" *ngIf="ticketStatus === 0">
+  <div class="app-container container-xxl">
+    <div class="card">
+      <div class="card-body p-0">
+          <div class="text-center px-4 mt-4 mb-1">
+              <img class="mw-100 mh-70px" alt="" src="assets/img/logoKKB-BCABiru.png">
+          </div>
+          <div class="card-px text-center py-20 my-20">
+            <h2 class="fs-2x fw-bold mb-10">Selamat Datang di Test Drive KKB BCA</h2>
+            <p class="text-gray-500 fs-4 fw-semibold mb-10">
+              Silahkan mendaftar test drive melalui Marketing Dealer / BCA
+            </p>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="app-content flex-column-fluid mt-3" *ngIf="ticketStatus === 1">
+  <div class="app-container container-xxl">
+    <div class="card">
+      <div class="card-body p-0">
+          <div class="text-center px-4 mt-4 mb-1">
+              <img class="mw-100 mh-70px" alt="" src="assets/img/logoKKB-BCABiru.png">
+          </div>
+          <div class="card-px text-center py-20 my-20">
+            <h2 class="fs-2x fw-bold mb-10">Selamat Datang {{consumer.consumerName}}, di Test Drive KKB BCA</h2>
+            <p class="text-gray-500 fs-4 fw-semibold mb-10">
+              Anda sedang berada dalam antrian 
+              <br/>Test Drive {{consumer.carID.merkID.merk}} {{consumer.carID.tipe}}
+            </p>
+            <p class="text-gray-500 fs-4 fw-semibold mb-10">
+              Anda berada di antrian {{nomorAntrian}} 
+              <br/>
+              dari total antrian {{totalAntrian}}
+            </p>
+              <p [hidden]="nomorAntrian !== 1">Sekarang adalah nomor antrianmu <br/> Silahkan pergi ke loket untuk melakukan testdrive</p>
+              <button [disabled]="nomorAntrian !== 1" [hidden]="nomorAntrian !== 1" class="btn btn-primary btn-block" (click)="doTestDrive()">Lakukan Test Drive</button>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="app-content flex-column-fluid mt-3" *ngIf="ticketStatus === 2">
+  <div class="app-container container-xxl">
+    <div class="card">
+      <div class="card-body p-0">
+          <div class="text-center px-4 mt-5 mb-1">
+              <img class="mw-100 mh-70px" alt="" src="assets/img/logoKKB-BCABiru.png">
+          </div>
+          <div class="card-px text-center py-20 my-20">
+            <h2 class="fs-2x fw-bold mb-10">Selamat Datang {{consumer.consumerName}}, di Test Drive KKB BCA</h2>
+            <p class="text-gray-500 fs-4 fw-semibold mb-10">
+              Silahkan menuju mobil  {{consumer.carID.merkID.merk}} {{consumer.carID.tipe}} <br/> untuk melakukan test drive
+            </p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="app-content flex-column-fluid mt-3" *ngIf="ticketStatus === 3">
+  <div class="app-container container-xxl">
+    <div class="card">
+      <div class="card-body p-0">
+          <div class="text-center px-4 mt-5 mb-1">
+              <img class="mw-100 mh-70px" alt="" src="assets/img/logoKKB-BCABiru.png">
+          </div>
+          <div class="card-px text-center py-20 my-20">
+            <h2 class="fs-2x fw-bold mb-10">Selamat Datang {{consumer.consumerName}}, di Test Drive KKB BCA</h2>
+            <p class="text-gray-500 fs-4 fw-semibold mb-10">
+              Terimakasih telah melakukan test drive mobil {{consumer.carID.merkID.merk}} {{consumer.carID.tipe}} <br/>
+              <!-- gas beli jangan test drive doang -->
+            </p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Update Kode Dealer {{ merk.dealerCode }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+
+    <div class="form-floating mb-2">
+      <input #namenya type="text" class="form-control" (focus)="true" placeholder="" [(ngModel)]="merk.dealerCode"
+        #dealerCode="ngModel" readonly>
+      <label for="floatingInputValue" class="readonlyLabel">Kode Dealer</label>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="mb-2">Merk</label>
+      <input 
+        type="text"
+        class="form-control"
+        name="nama"
+        maxlength="100"
+        minlength="2"
+        required
+        [(ngModel)]="merk.merk"
+      />
+    </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); onUpdate()">Save</button>
+	</div>
+</ng-template>
+
+<button class="btn btn-sm btn-outline-primary"  (click)="open(content)">Ubah</button>
